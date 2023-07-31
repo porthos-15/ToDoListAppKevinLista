@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Enter a task...">
+            <button type="submit">Add</button>
+        </form>
+        <div id="taskList">
+            <!-- Aquí se mostrarán las tareas -->
+        </div>
+    </div>
+    <script>
+    const taskForm = document.getElementById("taskForm");
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+
+        taskForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (taskInput.value.trim() !== "") {
+                addTask(taskInput.value);
+                taskInput.value = "";
+            }
+        });
+
+        function addTask(task) {
+            const taskItem = document.createElement("div");
+            taskItem.classList.add("task-item");
+
+            const taskCheckbox = document.createElement("input");
+            taskCheckbox.type = "checkbox";
+
+            const taskText = document.createElement("span");
+            taskText.textContent = task;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", function () {
+                taskItem.remove();
+            });
+
+            taskItem.appendChild(taskCheckbox);
+            taskItem.appendChild(taskText);
+            taskItem.appendChild(deleteButton);
+
+            taskList.appendChild(taskItem);
+        }</script>
+
+</body>
+</html>
